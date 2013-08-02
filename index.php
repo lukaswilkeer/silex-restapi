@@ -52,6 +52,22 @@ $app->get('/marcas', function () use ($cervejas){
     return implode(',',$cervejas['estilos']);
 });
 
+/* 
+TODO: Está dando um erro nesta rota, corrigir depois.
+// Edita o nome de uma cerveja existente.
+$app->put('/cervejas/{id}/nome/{novoNome}', function ($id,$novoNome) use ($cervejas['nome']){
+    if($novoNome == null){
+        return new Response (json_encode('Faltam parametros'),404);
+    }
+    // Verifica se existe a cerveja com aquele ID.
+    $key = array_key_exists($id, $cervejas[$id]);
+    if($key == null){
+        return new Response (json_encode('Não existe cerveja com essa id.'),404);
+    }
+    array_replace($cervejas[$id]['nome'],$novoNome);
+    return new Response (json_encode($cervejas[$id]),200);
+}); */
+
 //Adiciona o cabeçalho após todas as requisições
 $app->after(function (Request $request, Response $response){
     $response->headers->set('Content-Type','text/json');
