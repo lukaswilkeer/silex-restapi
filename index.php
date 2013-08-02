@@ -37,6 +37,17 @@ $app->get('/cervejas/{id}', function ($id) use ($cervejas) {
     return new Response (json_encode($cervejas[$id]),200);
 })->value('id',null);
 
+$app->get('/cervejas/{id}/{info}', function ($id,$info) use ($cervejas) {
+    if($info == null){
+        return new Response (json_encode('Não encontrado'),404);
+    }
+    $key = array_key_exists($info,$cervejas[$id]);
+    if($key == null){
+        return new Response (json_encode('Informação não existente'),404);
+    }
+    return new Response (json_encode($cervejas[$id][$info]),200);
+});
+
 $app->get('/marcas', function () use ($cervejas){
     return implode(',',$cervejas['estilos']);
 });
